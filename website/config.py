@@ -44,7 +44,7 @@ except ImportError:
         DEBUG_TB_INTERCEPT_REDIRECTS = True
         TEMPLATES_AUTO_RELOAD = False
 
-from services.web.website import website_secrets
+import secrets
 
 
 class BuiltInConfig:
@@ -79,12 +79,12 @@ class Config(SharedConfig):
     UPLOAD_FOLDER = "/uploads"
     MAX_CONTENT_LENGTH = 8 * 1024 * 1024
 
-    SQLALCHEMY_DATABASE_URI = website_secrets.DATABASE_URI  # secrets
+    SQLALCHEMY_DATABASE_URI = secrets.DATABASE_URI  # secrets
 
-    SECRET_KEY = website_secrets.SECRET_KEY  # secrets
+    SECRET_KEY = secrets.SECRET_KEY  # secrets
 
-    GOOGLE_OAUTH_CLIENT_ID = website_secrets.GOOGLE_OAUTH_CLIENT_ID  # secrets
-    GOOGLE_OAUTH_CLIENT_SECRET = website_secrets.GOOGLE_OAUTH_CLIENT_SECRET  # secrets
+    GOOGLE_OAUTH_CLIENT_ID = secrets.GOOGLE_OAUTH_CLIENT_ID  # secrets
+    GOOGLE_OAUTH_CLIENT_SECRET = secrets.GOOGLE_OAUTH_CLIENT_SECRET  # secrets
 
 
 class DevConfig(Config, SharedDevConfig):

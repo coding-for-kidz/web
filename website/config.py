@@ -44,7 +44,7 @@ except ImportError:
         DEBUG_TB_INTERCEPT_REDIRECTS = True
         TEMPLATES_AUTO_RELOAD = False
 
-import secrets
+from services import secrets
 
 
 class BuiltInConfig:

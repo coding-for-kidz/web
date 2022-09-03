@@ -113,7 +113,7 @@ def create_app(
     # logging
     if (not testing) and (not development) and GlobalConfig.sentry:
         try:
-            from secrets import SENTRY_SDK_DSN
+            from services.secrets import SENTRY_SDK_DSN
             from sentry_sdk.integrations.flask import FlaskIntegration
 
             sentry_sdk.init(

@@ -1,3 +1,6 @@
 [submodule "frontend"]
 	path = frontend
 	url = https://github.com/coding-for-kidz/frontend
+[submodule "core"]
+	path = core
+	url = https://github.com/coding-for-kidz/core.git

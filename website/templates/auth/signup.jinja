@@ -1,0 +1,152 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Sign up - Coding for Kidz</title>
+<style>
+    /* Light mode */
+    @media (prefers-color-scheme: light) {
+        body {
+            background-image: url("/static/img/signup-light.png");
+            background-color: #cccccc;
+        }
+    }
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-image: url("/static/img/signup-dark.png");
+            background-color: #cccccc;
+        }
+    }
+
+    .form-padding {
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="background">
+    {% if error %}
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+        <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" style="float:right;" type="button">
+        </button>
+    </div>
+    {% endif %}
+    <div class="content-box">
+        <div class="opac">
+            <h1>Sign up</h1>
+            <form autocomplete="on" class="form-padding row g-3" method="POST">
+                <div class="col-md-12 form-floating">
+                    <input class="form-control" id="username" name="username" onfocus="this.removeAttribute('readonly');"
+                           placeholder="Username" required value="{{username}}">
+                    <label class="form-label" for="username">Username</label>
+                    <div class="form-text" id="UsernameHelpBlock">
+                        Your username must contain only letters and numbers, and must not contain spaces, or emojis.
+                    </div>
+                </div>
+
+                <div class="col-md-6 form-floating">
+                    <input class="form-control" id="password" name="password" onfocus="this.removeAttribute('readonly');" placeholder="Password"
+                           required type="password" value="{{ password }}">
+                    <label for="password">Password</label>
+                    <div class="form-text" id="PasswordHelpBlock">
+                        Make sure you have a strong password.
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-link" data-bs-target="#passwordsecurity" data-bs-toggle="modal"
+                                type="button">
+                            Learn More
+                        </button>
+                        <!-- Modal -->
+                        <div aria-hidden="true" aria-labelledby="passwordsecuritylabel" class="modal fade"
+                             id="passwordsecurity" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="passwordsecuritylabel">Password Security</h5>
+                                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                                                type="button"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        When creating an account, it is important to have a secure password. You can
+                                        make a secure password by following the steps below:
+                                        <ol>
+                                            <li>Make sure that your password is long enough.</li>
+                                            <li>Make sure your password is not too obvious (i.e. password, example,
+                                                coding-for-kidz, etc.).
+                                            </li>
+                                            <li>Do not share your password with strangers or friends.</li>
+                                        </ol>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
+                                            Close
+                                        </button>
+                                        <button class="btn btn-primary" data-bs-dismiss="modal" type="button">
+                                            Understood
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 form-floating">
+                    <input class="form-control" id="confirm-password" name="confirm-password" onfocus="this.removeAttribute('readonly');"
+                           placeholder="Confirm Password" required type="password"
+                           value="{{confirm}}">
+                    <label class="form-label" for="confirm-password">Confirm Password</label>
+                </div>
+                <div class="col-12">
+                    <label for="writer" style="color: white">About Me</label>
+                    {% include 'base_components/editor.jinja' %}
+                    <div style="border: solid; border-width: 1px;">
+                        <div id="writer"></div>
+                    </div>
+                    <div id="content"></div>
+                </div>
+                <div class="col-md-9 form-floating">
+                    <input class="form-control" id="email" name="email" placeholder="example@example.com"
+                           type="email" value="{{ email }}">
+                    <label for="email">Email</label>
+                    <div class="form-text" id="EmailHelpBlock">
+                        Entering your email is optional and is not required. However, we cannot recover your
+                        passcode if you do not submit your email
+                    </div>
+                </div>
+                <div class="col-md-3 form-floating">
+                    <input class="form-control" id="age" max="122" min="1" name="age" placeholder="10"
+                           type="number" value="{{ age }}">
+                    <label class="form-label" for="age">Age</label>
+                    <div class="form-text" id="AgeHelpBlock">
+                        Entering your age is optional and is not required.
+                    </div>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" id="file" name="file" type="file" value="{{ file }}">
+                    <label for="file">Profile picture (beta testing)</label>
+                </div>
+                <div class="col-md-2">
+                    <input class="form-check-input" id="tos" type="checkbox" value="">
+                    <label class="form-check-label" for="tos">
+                        Agree to the <a href="/tos">Terms of Service</a>
+                    </label>
+                    <div class="invalid-feedback">
+                        You must agree to the Terms of Service before signing up.
+                    </div>
+                </div>
+                <br>
+                <button class="btn btn-primary" id="submit">Create your account</button>
+                <br>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $("#sign-up").addClass('active');
+
+</script>
+{% endblock %}

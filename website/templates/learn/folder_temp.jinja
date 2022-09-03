@@ -1,0 +1,74 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>{{ f.title }} - Coding for kidz</title>
+
+<meta content="{{ f.title }}" name="og:title"/>
+<meta content="{{ f.subtitle }}" name="og:subtitle"/>
+<meta content="{{ f.subtitle }}" name="og:image"/>
+
+<meta content="{{ f.title }}" name="twitter:title"/>
+<meta content="{{ f.subtitle }}" name="twitter:image"/>
+<meta content="{{ f.subtitle }}" name="twitter:description"/>
+
+<style>
+        .content {
+            padding: 20;
+        }
+
+</style>
+{% endblock %}
+{% block body %}
+{% if not current_user.is_authenticated %}
+<div class="alert alert-primary" role="alert">
+    You are not signed in, so your progress will not be saved.
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" style="float:right" type="button"></button>
+</div>
+{% endif %}
+<h1>{{ f.title }}</h1>
+<h2>{{ f.subtitle }}</h2>
+<center>
+    <img alt="image" src="{{ f.image|safe }}"><br>
+</center>
+<center>
+    <div class="content">{{ f.content|safe }}</div>
+    <br>
+</center>
+<h2>Folders</h2>
+<div class="row">
+    {% for course in fif %}
+    <div class="col-md-2 padding">
+        <a href="/folder/{{ course.folder_id }}/" style="color: black;">
+            <div class="card">
+                <img alt="Card Image Top" class="card-img-top" src="{{ course.image }}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ course.title }}</h4>
+                    <div class="card-subtitle">{{ course.subtitle }}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<h2>Lessons</h2>
+<div class="row">
+    {% for course in lif %}
+    <div class="col-md-2 padding">
+        <a href="/lesson/{{ course.lesson_id }}/" style="color: black;">
+            <div class="card">
+                <img alt="Card Image Top" class="card-img-top" src="{{ course.image }}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ course.title }}</h4>
+                    <div class="card-subtitle">{{ course.subtitle }}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $('#learn').addClass('active');
+
+</script>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>Settings - Coding for Kidz</title>
+    <style>
+        .sidebar {
+            background-color: var(--gray);
+        }
+
+        .sidebar button {
+            padding: 6px 8px 6px 16px;
+            border: 0;
+            background-color: var(--gray);
+            color: var(--text-color);
+            width: 100%;
+        }
+
+        .sidebar button:hover {
+            background-color: var(--green);
+        }
+
+    </style>
+{% endblock %}
+{% block body %}
+    <script src="/static/settings/settings.min.js"></script>
+    <div class="row align-items-start">
+        <div class="col sidebar min-vh-100">
+            <button onclick="$('#general').hide();">General</button>
+            <button onclick="switchTab('appearance')">Appearance</button>
+        </div>
+        <div class="col-10">
+            <div id="general"></div>
+            <div id="appearance"></div>
+            Content
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        function switchToTab(tabName) {
+            switchTab(tabName)
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>Settings</title>
+    <script src="/static/pwaSettings/pwaSettings.min.js"></script>
+{% endblock %}
+{% block body %}
+    <h1>Settings</h1>
+    <form class="row g-3">
+        <div class="col-md-3">
+            <label for="checkForUpdatesTimeout" class="form-label">Check for Updates Frequency (in seconds)</label>
+            <input type="number" class="form-control" id="checkForUpdatesTimeout">
+        </div>
+        <div class="col-md-3">
+            <label for="notifications" class="form-label">Send a notification once updated?</label>
+            <input type="checkbox" class="form-checkbox" id="notifications">
+        </div>
+        <div class="col-md-12">
+            <button type="button" id="save" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+{% endblock %}

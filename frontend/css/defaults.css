@@ -1,0 +1,59 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    /* Hide horizontal scrollbar */
+    overflow-x: hidden;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-image 1s ease-in-out;
+}
+
+p {
+    margin:
+    5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    font-family: 'Xanh Mono', monospace;
+}
+form, label {
+    text-align: center
+}
+
+footer {
+    text-align: center;
+    padding: 3px;
+    transition-property: all;
+    transition-duration: 1s;
+}
+
+@media (prefers-color-scheme: dark) {
+    footer {
+        background-color: #333;
+        color: #FFFFFFFF;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    footer {
+        background-color: #C5C5C5FF;
+        color: #000000FF;
+    }
+}
+
+
+footer a {
+    text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    input {
+        color: black;
+        background-color: white;
+    }
+
+    label {
+        color: black;
+    }
+}

@@ -1,0 +1,40 @@
+{
+  "short_name": "Coding for Kidz",
+  "name": "Coding for Kidz App",
+  "icons": [
+    {
+      "src": "/static/favicon_ico/favicon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/favicon_ico/favicon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "background_color": "#FFFFFF",
+  "display": "standalone",
+  "theme_color": "#D7BF78",
+  "shortcuts": [
+    {
+      "name": "Learn",
+      "short_name": "Learn",
+      "description": "View the learn page",
+      "url": "/learn",
+      "icons": [{ "src": "/static/favicon_ico/favicon-512x512.png", "sizes": "512x512" }]
+    },
+    {
+      "name": "Sign in",
+      "short_name": "Sign in",
+      "description": "Sign in to Coding for Kidz",
+      "url": "/signin",
+      "icons": [{ "src": "/static/favicon_ico/favicon-512x512.png", "sizes": "512x512" }]
+    }
+  ],
+  "description": "Learn how to code",
+  "display_override": ["window-controls-overlay"]
+}

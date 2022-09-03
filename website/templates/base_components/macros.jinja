@@ -1,0 +1,31 @@
+{% macro modal(id, trigger_text, title, dismiss="Close", action="Understood", action_bind="") -%}
+    {# Button trigger modal #}
+    <button class="btn btn-link" data-bs-target="#{{ id }}" data-bs-toggle="modal"
+            type="button">
+        {{ trigger_text }}
+    </button>
+    {# Modal #}
+    <div aria-hidden="true" aria-labelledby="{{ id }}label" class="modal fade"
+         id="{{ id }}" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="{{ id }}label">{{ title }}</h5>
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"
+                            type="button"></button>
+                </div>
+                <div class="modal-body">
+                    {{ caller() }}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">
+                        {{ dismiss }}
+                    </button>
+                    <button class="btn btn-primary" onclick="{{ action_bind }}" data-bs-dismiss="modal" type="button">
+                        {{ action }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{%- endmacro %}

@@ -1,0 +1,41 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<link href="/static/css/style.css" rel="stylesheet">
+<script
+  src="https://browser.sentry-cdn.com/7.11.1/bundle.min.js"
+  integrity="sha384-qcYSo5+/E8hEkPmHFa79GRDsGT84SRhBJHRw3+dbQyh0UwueiFP1jCsRBClEREcs"
+  crossorigin="anonymous"
+></script>
+<title>Error - Coding for kidz</title>
+{% endblock %}
+{% block body %}
+<div style="text-align:center">
+    <h1>Error</h1>
+    <script>
+        setTimeout(function () {
+            window.history.back();
+        }, `10000`);
+
+
+    </script>
+    There is an error here, that's all I know. Maybe you should return to the home page or the previous, this
+    error has
+    <noscript>not</noscript>
+    been automatically reported.
+    <br>
+    <button class="btn btn-link" onclick="window.history.back()">
+        Return to the previous page (this will happen automatically in ten seconds)
+    </button>
+    <br>
+</div>
+{% endblock %}
+{% if sentry_event_id %}
+{% block script %}
+<script>
+    Sentry.init({ dsn: "https://ea8e9e0ead8b4237bb50efa99f27ee5a@o440973.ingest.sentry.io/5410703" });
+    Sentry.showReportDialog({
+        eventId: "{{ event_id }}",
+    });
+</script>
+{% endblock %}
+{% endif %}

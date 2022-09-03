@@ -1,0 +1,26 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Test {{ language }} code</title>
+<style>
+    #run-code {
+        background-color: green;
+    }
+
+</style>
+<link href="/static/css/code_editor.css" rel="stylesheet">
+{% endblock %}
+{% block body %}
+<div id="editor">{{ example_code }}</div>
+
+<script crossorigin="anonymous"
+        integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+        src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+{% endblock %}
+{% block script %}
+<script type="text/javascript">
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.session.setMode("ace/mode/{{ language }}");
+
+</script>
+{% endblock %}

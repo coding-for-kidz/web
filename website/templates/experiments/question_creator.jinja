@@ -1,0 +1,15 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
+    <title>Question Creator</title>
+{% endblock %}
+{% block body %}
+    <h1>Question Creator</h1>
+    <div id="question-creator">
+
+    </div>
+{% endblock %}
+{% block script %}
+    <script src="/static/questionCreator/questionCreator.js"></script>
+{% endblock %}

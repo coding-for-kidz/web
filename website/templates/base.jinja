@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        {% include 'base_components/head.jinja' %}
+
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body class="body-class" id="body">
+
+        {% include 'base_components/navbar.jinja' %}
+
+        {% include 'base_components/flash.jinja' %}
+
+        <noscript style="z-index:999">
+            <div class="alert alert-danger" role="alert">Javascript is not enabled this website.
+                Some features will not work.
+            </div>
+        </noscript>
+        <div id="body-content" style="z-index: 1">
+            <div id="page-container" style="z-index: 2">
+                <div id="content-wrap" style="z-index: 3;">
+                    {% block body %}
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+        {% block script %}
+        {% endblock %}
+
+        {% include 'base_components/footer.jinja' %}
+        <script>
+            console.warn("%cIMPORTANT: READ THIS FIRST", "color: #F00; font-size: 30px; -webkit-text-stroke: 1px black; font-weight:bold")
+            console.warn("This is part of your browser intended for developers. If someone told you to paste something here, don't do it! They could steal your password, or delete your account, among other things. If you don't understand exactly what you are doing here, you should close this window without doing anything.");
+        </script>
+    </body>
+</html>

@@ -1,0 +1,8 @@
+# https://www.robotstxt.org/robotstxt.html
+# Used for SEO
+
+User-agent: *
+Disallow: /static/*
+Disallow: /error-test/*
+Disallow: /projects
+Disallow: /refresh

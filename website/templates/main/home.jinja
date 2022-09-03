@@ -1,0 +1,46 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Home - Coding for kidz</title>
+<meta content="The home page of the Coding for kidz website" name="description">
+<style>
+    /* Light mode */
+    @media (prefers-color-scheme: light) {
+        body {
+            background-image: url("/static/img/home-light.png");
+            background-color: #cccccc;
+        }
+    }
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-image: url("/static/img/home-dark.png");
+            background-color: #cccccc;
+        }
+    }
+
+</style>
+{% endblock %}
+{% block body %}
+<div class="content-box">
+    <h1>Coding for Kidz</h1>
+    <p>This is the home page of the Coding for Kidz website, a fun interactive website that teaches kids coding, read
+        the <a href="/about">about page</a> for more information.</p><br>
+    {% if current_user.is_authenticated %}
+    <!--    <h2>For you</h2>-->
+    <!--    {% for item in for_you %}-->
+    <!--    {% endfor %}-->
+    {% else %}
+
+    <p>You can <a href="/learn">try it out</a>, or you can <a href="/signup">sign up</a>.</p>
+    {% endif %}
+    {% if current_user.is_authenticated and (current_user.admin >= 3) %}
+    <p><a href="/admin-site">Go to the Admin Site here!</a></p>
+    {% endif %}
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $("#main").addClass('active');
+
+</script>
+{% endblock %}

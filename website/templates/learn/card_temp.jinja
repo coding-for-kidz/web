@@ -1,0 +1,82 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>{{ l.title }} - Coding for kidz</title>
+
+    <meta content="{{ l.title }}" name="og:title"/>
+    <meta content="{{ l.subtitle }}" name="og:subtitle"/>
+    <meta content="{{ l.subtitle }}" name="og:image"/>
+
+    <meta content="{{ l.title }}" name="twitter:title"/>
+    <meta content="{{ l.subtitle }}" name="twitter:image"/>
+    <meta content="{{ l.subtitle }}" name="twitter:description"/>
+    {# skulpt #}
+    <script src="https://cdn.jsdelivr.net/npm/@s524797336/skulpt@1.0.3/skulpt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@s524797336/skulpt@1.0.3/skulpt-stdlib.min.js"></script>
+
+    {# import ace #}
+    <script
+            crossorigin="anonymous"
+            integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+            src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
+    ></script>
+    {# setting height is important #}
+    <style>
+        .editor, .output {
+            height: 60vh;
+        }
+
+        .content {
+            padding: 20%;
+        }
+
+    </style>
+<script>
+        // editor
+        $("code").each(function (index) {
+          const editor = ace.edit(this);
+          editor.setTheme("ace/theme/monokai");
+          editor.session.setMode("ace/mode/python");
+          editor.session.setValue("# Enter your code here\nprint('Hello' + ' ' +  'world')\n"); // default value in editor
+          $(this).data("aceObject", editor);
+        });
+
+</script>
+{% endblock %}
+{% block body %}
+{% if not current_user.is_authenticated %}
+<div class="alert alert-primary" role="alert">
+    You are not signed in, so your progress will not be saved.
+    <button aria-label="Close" class="btn-close" data-bs-dismiss="alert" style="float:right" type="button"></button>
+</div>
+{% endif %}
+<h1>{{ l.title }}</h1>
+<h2>{{ l.subtitle }}</h2>
+<center>
+    <img alt="image" src="{{ l.image|safe }}"><br>
+    <a href="/admin-site/lesson/edit/{{ l.lesson_id }}/">Edit</a>
+</center>
+<center>
+    <div class="content">{{ l.content|safe }}</div>
+    <br>
+</center>
+{% if l.questions != [] %}
+<h2>Questions</h2>
+<form>
+    {% for question in l.questions %}
+    <p>{{ question.content }}</p>
+    {% for answer in question.answer_list %}
+    <div class="form-check">
+        <input class="form-check-input" id="{{ answer }}" name="{{ answer }}" src="{{ answer }}" type="radio">
+        <label class="form-check-label" for="{{ answer }}">{{ answer }}</label>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <button class="btn btn-primary" id="submit">Check Answers</button>
+</form>
+{% endif %}
+{% endblock %}
+{% block script %}
+<script>
+    $("#learn").addClass('active');
+</script>
+{% endblock %}

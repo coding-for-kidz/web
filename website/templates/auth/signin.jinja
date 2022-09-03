@@ -1,0 +1,165 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>Sign In - Coding for Kidz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+
+        /* Light mode */
+        @media (prefers-color-scheme: light) {
+            body {
+                background-image: url("/static/img/signin-light.png");
+                background-color: #cccccc;
+            }
+        }
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-image: url("/static/img/signin-dark.png");
+                background-color: #cccccc;
+            }
+        }
+
+        .form-padding {
+            padding-right: 10%;
+            padding-left: 10%;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+<div class="alert alert-info" id="status" role="alert">
+    Attempting to log you in, please wait.
+</div>
+<div class="alert alert-danger" id="error" role="alert">
+    Incorrect Username or Password
+</div>
+<div class="alert alert-danger" id="fail" role="alert">
+    Login Failed due to Server Error
+</div>
+<div class="background">
+    <div class="content-box center">
+        <div class="opac">
+{# TODO: ADD SIGNIN INTEGRATION with Google, Microsoft 365, and GitHub. #}
+            <h1>Sign in</h1>
+            <form autocomplete="on" class="form-padding" method="POST">
+                <div class="mb-2 form-floating animate__animated" id="username-box">
+                    <input class="form-control" id="username" name="username" placeholder="Username or Email"
+                           required value="{{ username }}">
+                    <label class="col-form-label" for="username">Username or Email</label>
+                </div>
+                <div class="mb-2 form-floating animate__animated" id="password-box">
+                    <input class="form-control" id="password" name="password" onfocus="this.removeAttribute('readonly');"
+                           placeholder="Password" required
+                           type="password" value="{{ password }}">
+                    <label class="col-form-label" for="password">Password</label>
+                </div>
+                <br>
+                <button class="btn btn-secondary animate__animated" id="back" onclick="passuser()" type="button">Back</button>
+                <button class="btn btn-primary animate__animated" id="next" onclick="userpass()" type="button">Next</button>
+                <button class="btn btn-primary animate__animated" id="submit-ajax" type="button">Sign in</button>
+                <br><a href="/forgot-password">Forgot my password</a>
+                <input type="hidden" id="redirect" value="{{ request.args.get('next', '') }}"/>
+            </form>
+            <p> If you do not have an account <a href="/sign-up">sign up</a>. No email required.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    $("#sign-in").addClass('active');
+
+</script>
+<script>
+    $("#status").hide();
+    $("#error").hide();
+    $("#fail").hide();
+    $("#password-box").hide();
+    $("#back").hide();
+    $("#submit-ajax").hide();
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    function passuser () {
+        $("#password-box").addClass("animate__backOutRight");
+        $("#back").addClass("animate__backOutRight");
+        $("#submit-ajax").addClass("animate__backOutRight");
+        sleep(500).then(function () {
+            $('#password-box').hide();
+            $('#back').hide();
+            $('#submit-ajax').hide();
+
+
+            let next = $('#next');
+            next.show();
+            next.removeClass("animate__backOutLeft");
+            next.addClass("animate__backInLeft");
+
+            let usernameBox = $('#username-box');
+            usernameBox.show();
+            usernameBox.removeClass("animate__backOutLeft");
+            usernameBox.addClass("animate__backInLeft");
+        })
+    }
+
+    function userpass () {
+        $("#username-box").addClass("animate__backOutLeft");
+        $("#next").addClass("animate__backOutLeft");
+        sleep(500).then(function () {
+            $("#username-box").hide();
+            $('#next').hide();
+
+
+            let passwordBox = $('#password-box');
+            passwordBox.show();
+            passwordBox.removeClass("animate__backOutRight");
+            passwordBox.addClass("animate__backInRight");
+
+            let back = $('#back');
+            back.show();
+            back.removeClass("animate__backOutRight");
+            back.addClass("animate__backInRight");
+
+            let submitAjax = $('#submit-ajax');
+            submitAjax.show();
+            submitAjax.removeClass("animate__backOutRight");
+            submitAjax.addClass("animate__backInRight");
+        });
+    }
+
+    $(function() {
+        $('button#submit-ajax').bind('click', function() {
+            if ($('input[name="username"]').val() === '') {
+                passuser();
+                $('input#username').focus();
+                return false;
+            }
+
+            if ($('input#password').val() === '') {
+                $('input#password').focus();
+                $('#error').text('Please enter a password.');
+                return false;
+            }
+            $("#status").show();
+            // Send the data using post
+            var auth = $.post("/api/signin/", {
+                                username: $('input#username').val(),
+                                password: $('input#password').val()
+                             });
+
+            auth.done(function( data ) {
+                if (data.result==='f') {
+                    $("#status").hide();
+                    $("#error").show();
+                }
+                else {
+                    window.location.href = $('input#redirect').val();
+                }
+            });
+        return false;
+        });
+    });
+
+</script>
+{% endblock %}

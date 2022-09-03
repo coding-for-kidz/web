@@ -1,0 +1,121 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>{% if create %}Create Lesson{% else %}Edit {{ lesson.title }}{% endif %} - Coding for Kidz</title>
+<script referrerpolicy="origin"
+        src="https://cdn.tiny.cloud/1/25kizcnzkkeg7anwk1ivi19ojqawvae8cdoflt6m8ufwcg1a/tinymce/5/tinymce.min.js"></script>
+{% endblock %}
+{% block body %}
+<script>
+{#<!--      $(function() {-->#}
+{#<!--        $('a#submitajax').bind('click', function() {-->#}
+{#<!--          $.getJSON($SCRIPT_ROOT + '/api/el/{{ lesson.lesson_id }}', {-->#}
+{#<!--            lesson_id: $('input[name="lesson_id"]').val(),-->#}
+{#<!--            title: $('input[name="title"]').val(),-->#}
+{#<!--            subtitle: $('input[name="subtitle"]').val(),-->#}
+{#<!--            image: $('input[name="image"]').val(),-->#}
+{#<!--            body: $('input[name="body"]').val(),-->#}
+{#<!--            goes_to: $('input[name="goesTo"]').val()-->#}
+{#<!--          }, function(data) {-->#}
+{#<!--            if (data.status=='f')-->#}
+{#<!--                $("#error").text("Edit lesson failed");-->#}
+{#<!--            else {-->#}
+{#<!--                window.location.href = $SCRIPT_ROOT+"/admin-site/learn/";-->#}
+{#<!--            }-->#}
+{#<!--          });-->#}
+{#<!--          return false;-->#}
+{#<!--        });-->#}
+{#<!--      });-->#}
+
+</script>
+<link href="https://cdn.jsdelivr.net/npm/inscrybmde@1.11.6/dist/inscrybmde.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/inscrybmde@1.11.6/dist/inscrybmde.min.js"></script>
+<script src="/static/js/signup-validate.js"></script>
+<h1>{% if create %}Create Lesson{% else %}Edit {{ lesson.title }}{% endif %}</h1>
+<form class="form-padding" method="POST">
+    <center>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="lesson_id">Lesson ID</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="lesson_id"
+                       max="10000000" name="lesson_id" onfocus="this.removeAttribute('readonly');" required type="number"
+                       value="{{ lesson.lesson_id }}">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="folder_id">Folder ID</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="folder_id"
+                       max="10000000" name="folder_id" onfocus="this.removeAttribute('readonly');" required type="number"
+                       value="{{ lesson.folder_id }}">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="title">Title</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="title" name="title"
+                       onfocus="this.removeAttribute('readonly');" required value="{{ lesson.title }}">
+            </div>
+
+            <div class="form-text" id="TitleHelpBlock">
+                Make sure the title is not too long, it has to fit on the learn page.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="subtitle">Subtitle</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="subtitle" name="subtitle"
+                       onfocus="this.removeAttribute('readonly');" required value="{{ lesson.subtitle }}">
+            </div>
+
+            <div class="form-text" id="SubtitleHelpBlock">
+                Make sure the Subtitle is not too long or too short like a title, it has to fit on the learn
+                page, also be descriptive and don't echo the title.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="image">Image</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="image" name="image" value="{{ lesson.image }}">
+            </div>
+
+            <div class="form-text" id="ImageHelpBlock">
+                Make sure the image reflects what is being taught in the lesson. You can leave it blank if you
+                don't want to change it.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="writer">Body</label>
+            {% include 'base_components/editor.jinja' %}
+            <div style="border: solid; border-width: 1px;">
+                <div id="writer"></div>
+            </div>
+            <div id="content"> {{ lesson.body }}</div>
+
+            <div class="form-text" id="BodyHelpBlock">
+                Make sure you are clear and understandable.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="goes_to">Goes To</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="goes_to" name="goes_to" onfocus="this.removeAttribute('readonly');"
+                       required type="text" value="{{ lesson.goes_to }}">
+            </div>
+        </div>
+        <div id="error" style="color: red;"></div>
+        <button class="btn btn-primary" id="submitajax" type="submit">{% if create %}Create{% else %}Edit{% endif %}
+            Lesson
+        </button>
+    </center>
+</form>
+<script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+          toolbar_mode: 'floating',
+        });
+
+</script>
+{% endblock %}

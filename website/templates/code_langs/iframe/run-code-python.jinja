@@ -1,0 +1,44 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>Run python code</title>
+    <script src="/static/skulpt/skulpt.min.js"></script>
+    <script src="/static/skulpt/skulpt-stdlib.js"></script>
+
+    <!--import ace-->
+    <script
+            crossorigin="anonymous"
+            integrity="sha512-GZ1RIgZaSc8rnco/8CXfRdCpDxRCphenIiZ2ztLy3XQfCbQUSCuk8IudvNHxkRA3oUg6q0qejgN/qqyG1duv5Q=="
+            src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"
+    ></script>
+    <!--setting height is important-->
+    <style>
+          .editor, .output {
+            height: 60vh;
+          }
+
+    </style>
+{% endblock %}
+{% block body %}
+    <h1 style="text-align: center">Run python code</h1>
+    <div style="display: flex; flex-wrap: wrap;">
+        <!--editor container: setting width to is important-->
+        <div style="width: 50%;">
+            <div class="editor"></div>
+        </div>
+        <!--output container: setting width to is important-->
+        <div style="width: 50%; background-color: black; color: white;">
+            <div class="output"></div>
+        </div>
+        <!--button group-->
+        <div style="margin-top: 10px;">
+            <button class="run-button btn btn-success" onclick="runit($($(this).parent().siblings()[0]).children()[0], $($(this).parent().siblings()[1]).children()[0])"
+                    type="button">
+                Run code <span class="material-icons md-24">play_arrow</span>
+            </button>
+            <button class="stop-button btn btn-danger" onclick="stopit()" style="display: none;" type="button">
+                Stop code<span class="material-icons md-24">stop</span>
+            </button>
+        </div>
+    </div>
+    <script src="/static/js/run-code/skulpt-compiler.js"></script>
+{% endblock %}

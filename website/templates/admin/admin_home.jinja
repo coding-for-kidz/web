@@ -1,0 +1,29 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Admin home - Coding for Kidz</title>
+{% endblock %}
+{% block body %}
+<h1>Manage Site</h1>
+<p>You can access this part of the website because you are an admin. You have many powers, use them wisely.</p>
+<br><p><b>You can:</b></p><br>
+<p>Edit user profiles and delete user profiles</p><br>
+
+<p>Edit articles and their tags and authors or delete them</p><br>
+
+<p>Make people staff or mods. Making users admins requires database access</p><br>
+
+<p>Edit user progress</p><br>
+
+<p>Add lessons</p><br>
+
+<p>Feature articles</p><br>
+
+<p>Run <a href="/create-all">db.create_all()</a></p><br>
+
+<p><a href="/">Return to the Home Page</a></p>
+{% endblock %}
+{% block script %}
+    <script>
+        $("#main").addClass('active');
+    </script>
+{% endblock %}

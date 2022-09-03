@@ -1,0 +1,25 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>{{title}}</title>
+{% endblock %}
+{% block body %}
+<center>
+    <h1>{{title}}</h1>
+    <h3>by {{author}}</h3>
+    <h2>{{subtitle}}</h2>
+    <img alt="image" src="{{img}}">
+    <p>{{body}}</p>
+</center>
+{% if current_user.is_authenticated() %}
+<h2>New Comment</h2>
+<form>
+
+</form>
+{% end if %}
+<h2>Comments</h2>
+<li class="comments">
+    <ul></ul>
+</li>
+{% endblock %}
+{% block script %}
+{% endblock %}

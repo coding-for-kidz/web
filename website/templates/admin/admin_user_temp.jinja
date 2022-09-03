@@ -1,0 +1,127 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>{%  if create %}Create User{%  else %}Edit User {{ user.user_id }}{% endif %} - Coding for Kidz</title>
+    <style>
+        table {
+          border-collapse: collapse;
+          width: 100%;
+        }
+
+        td, th {
+          border: 1px solid var(--gray);
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:first-child {
+            background: var(--blue);
+        }
+
+        tr:nth-child(even) {
+          background-color: var(--gray);
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    <script>
+        $("#error").hide();
+
+        function sendToServer() {
+            $("#error").hide();
+            submitButton = $("#submit");
+            submitButton.addClass("disabled");
+            actionBoolean = "{{ create }}";
+            if (actionBoolean === "True") {
+                action = "create"
+            }
+            else {
+                action = "edit"
+            }
+            var postData = $.post("/admin-site/user/api/", {
+                        action: action,
+                        id: {{ user.id }},
+                        username: $('input#username').val(),
+                        password: $('input#password').val(),
+                        email: $('input#email').val(),
+                        about: $('#about').text(),
+                        grade: $('input#grade').val(),
+                        admin: $('input#admin').val()
+                     });
+            postData.done(function( data ) {
+                if (data.status === "success") {
+                    window.location.reload();
+                }
+                else if (data.status === "error") {
+                    $("#error-text").text(data.error);
+                    $("#error").show();
+                }
+            });
+            submitButton.removeClass("disabled");
+        }
+    </script>
+    <div class="alert alert-danger" id="error" role="alert">
+        <div id="error-text"></div>
+    </div>
+    <h1>{%  if create %}Create User{%  else %}Edit User {{ user.user_id }}{% endif %}</h1>
+    <form autocomplete="on">
+        <table>
+            <tr>
+                <td>Name</td>
+                <td>Value</td>
+            </tr>
+            <tr>
+                <td>User Id</td>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td>
+                    <div class="col-sm-2"><input class="form-control" id="username" name="username"
+                                                 value="{{ user.username }}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>
+                    <div class="col-sm-3"><input class="form-control" id="email" name="email" type="email"
+                                                 value="{{ user.email }}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>About</td>
+                <td>
+                    <div class="col-sm-4"><textarea id="about" name="about" rows="3">{{ user.about }}
+                </textarea></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td>
+                    <div class="col-sm-4"><input class="form-control" id="password" name="password"
+                                                 type="password" value=""></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Grade</td>
+                <td>
+                    <div class="col-sm-1"><input class="form-control" id="grade" name="grade"
+                                                 type="number" value="{{ user.grade }}"></div>
+                </td>
+            </tr>
+            <tr>
+                <td>Admin</td>
+                <td>
+                    <div class="col-sm-1"><input class="form-control" id="admin" name="admin"
+                                                 type="number" value="{{ user.admin }}"></div>
+                </td>
+            </tr>
+        </table>
+        {% if not create %}
+        <a href="/admin-site/delete-user/{{ user.id }}/">Delete this user</a><br>
+        {% endif %}
+        <button class="btn btn-primary" id="submit" type="button" onclick="sendToServer()">{%  if create %}Create User{%  else %}Edit User{% endif %}</button>
+    </form>
+    <br>
+{% endblock %}
+{% block script %}
+{% endblock %}

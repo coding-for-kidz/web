@@ -1,0 +1,18 @@
+{% extends 'base.jinja' %}
+{% block head %}
+    <title>Release Notes - Coding for Kidz</title>
+{% endblock %}
+{% block body %}
+    <h1>Release Notes</h1>
+    <ul class="list-group" style="margin-left: 10%; margin-right: 15%;">
+        <li class="list-group-item">8/29/2022 - Changed default check for update timeout.</li>
+        <li class="list-group-item">8/29/2022 - Added custom login redirect locations.</li>
+        <li class="list-group-item">2/23/2022 - Made release notes page a list group.</li>
+        <li class="list-group-item">2/23/2022 - Fixed dark mode issues.</li>
+        <li class="list-group-item">2/23/2022 - Fixed check for updates bug.</li>
+        <li class="list-group-item">2/17/2022 - Changed the check for updates timeout to 10 seconds from 5 seconds.</li>
+        <li class="list-group-item">2/17/2022 - Fixed bug where clicking on release notes button of the update
+            notifications would not open a window with the release notes</li>
+        <li class="list-group-item">2/16/2022 - Fixed bugs and added release notes page</li>
+    </ul>
+{% endblock %}

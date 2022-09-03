@@ -1,0 +1,44 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Test code</title>
+{% endblock %}
+{% block body %}
+<div style="text-align: center;">
+    <h1>Pick your language</h1>
+</div>
+<p>Note: Not all languages can be run in the browser.</p>
+<ul class="list-group" style="margin-left: 5%; margin-right: 25%;">
+    <li class="list-group-item"><a href="/code/python/">Python</a></li>
+    <li class="list-group-item"><a href="/code/html/">HTML</a></li>
+    <li class="list-group-item"><a href="/code/css/">CSS</a></li>
+    <li class="list-group-item"><a href="/code/javascript/">Javascript</a></li>
+    <li class="list-group-item"><a href="/code/c#/">C#</a></li>
+    <li class="list-group-item"><a href="/code/java/">Java</a></li>
+    <li class="list-group-item"><a href="/code/ruby/">Ruby</a></li>
+    <li class="list-group-item"><a href="/code/c/">C</a></li>
+    <li class="list-group-item"><a href="/code/c++/">C++</a></li>
+    <li class="list-group-item"><a href="/code/php/">PHP</a></li>
+    <li class="list-group-item"><a href="/code/perl/">Perl</a></li>
+    <li class="list-group-item"><a href="/code/go/">Go</a></li>
+    <li class="list-group-item"><a href="/code/lua/">Lua</a></li>
+    <li class="list-group-item"><a href="/code/haskell/">Haskell</a></li>
+    <li class="list-group-item"><a href="/code/scala/">Scala</a></li>
+    <li class="list-group-item"><a href="/code/swift/">Swift</a></li>
+    <li class="list-group-item"><a href="/code/rust/">Rust</a></li>
+    <li class="list-group-item"><a href="/code/typescript/">TypeScript</a></li>
+    <li class="list-group-item"><a href="/code/kotlin/">Kotlin</a></li>
+    <li class="list-group-item"><a href="/code/groovy/">Groovy</a></li>
+    <li class="list-group-item"><a href="/code/dart/">Dart</a></li>
+    <li class="list-group-item"><a href="/code/d/">D</a></li>
+    <li class="list-group-item"><a href="/code/elixir/">Elixir</a></li>
+    <li class="list-group-item"><a href="/code/erlang/">Erlang</a></li>
+    <li class="list-group-item"><a href="/code/wasm/">WebAssembly</a></li>
+</ul>
+{% endblock %}
+{% block script %}
+<script>
+    $("#run-code").addClass('active');
+
+</script>
+{% endblock %}
+

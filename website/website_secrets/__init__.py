@@ -1,0 +1,22 @@
+# Copyright (c) 2021 by the Coding for Kidz Project
+#
+# This software should not be viewed, modified, or shared without explicit written permission by the copyright holders.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+# THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+# TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+DATABASE_URI = (
+    "postgresql://cyqemzrtzvrcyd:1f35970019f2feb8a475168342cbb43fa82a98ec52a43c0d8a1b52abab4884ed@ec2-54"
+    "-157-12-250.compute-1.amazonaws.com:5432/debmg02ktbfr0h"
+)  # Database URL
+SECRET_KEY = b"\xc9 (\xa7+\xf4rg\xf0\xbc?4\x1e\xc3X\xc1"
+GOOGLE_OAUTH_CLIENT_ID = (
+    "73041173869-rqg4jutj4nke5ove5lr7r2kv7qr9saqu.apps.googleusercontent.com"
+)
+GOOGLE_OAUTH_CLIENT_SECRET = "rE6IC1t2mJ2q4qhkBcBKRzoR"
+SENTRY_SDK_DSN = (
+    "https://ea8e9e0ead8b4237bb50efa99f27ee5a@o440973.ingest.sentry.io/5410703"
+)

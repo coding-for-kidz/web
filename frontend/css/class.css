@@ -1,0 +1,42 @@
+.hide {
+    display: none;
+}
+
+.opac {
+    opacity: 1;
+}
+.center {
+    text-align: center;
+}
+.no-underline { text-decoration: none; }
+
+.form-padding {
+    padding-right: 10%;
+    padding-left: 10%;
+}
+
+.padding {
+    margin: 5%;
+}
+
+.red {
+    color: red;
+}
+.orange {
+    color: orange;
+}
+.yellow {
+    color: yellow;
+}
+.green {
+    color: var(--green);
+}
+.blue {
+    color: var(--blue);
+}
+.dark-blue {
+    color: var(--dark-blue);
+}
+.purple {
+    color: purple;
+}

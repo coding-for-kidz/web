@@ -1,0 +1,20 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Projects - Coding for kidz</title>
+{% endblock %}
+{% block body %}
+<h1>My Projects</h1>
+{% for item in projects %}
+<a>{{ item }}</a>
+{% endfor %}
+<h1>Crowd Projects</h1>
+{% for item in crowd_projects %}
+<a href="/projects/{{ item.id }}">{{ item.name }}</a>
+{% endfor %}
+{% endblock %}
+{% block script %}
+<script>
+    $("#projects").addClass('active');
+
+</script>
+{% endblock %}

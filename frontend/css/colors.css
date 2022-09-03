@@ -1,0 +1,23 @@
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-color: white;
+        --bg-color-dulled: #efefef;
+        --text-color: black;
+        --gray: #C5C5C5FF;
+        --green: #03bb09;
+        --blue: #108fe0;
+        --dark-blue: #0d6efd;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: black;
+        --bg-color-dulled: #262626FF;
+        --text-color: white;
+        --gray: #333333FF;
+        --green: #0f9212;
+        --blue: #0d6cab;
+        --dark-blue: #0d6efd;
+    }
+}

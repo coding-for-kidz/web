@@ -1,0 +1,72 @@
+.topnavli {
+    float: left;
+    font-family: 'Cutive Mono', monospace;
+    color: green;
+}
+
+.float-right {
+    float: right;
+}
+
+.topnav {
+    padding-left: 0;
+    padding-right: 0;
+    transition: background-color 1s;
+    z-index: 99;
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: var(--gray);
+    -webkit-app-region: drag;
+    app-region: drag;
+}
+
+.topnav-titlebar {
+    padding-right: 311px;
+}
+
+.topnavli a {
+    display: block;
+    color: var(--text-color);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: background-color 0.5s;
+    -webkit-app-region: no-drag;
+    app-region: no-drag;
+}
+
+@media (prefers-color-scheme: light) {
+    .topnavli a:hover:not(.active) {
+        background-color: rgb(221, 221, 221);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .topnavli a:hover:not(.active) {
+        background-color: rgb(31, 31, 31);
+    }
+}
+
+
+.active {
+    background-color: var(--green);
+}
+
+
+.topnavli a:hover {
+    animation-duration: 0.5s;
+    animation-name: enlarge;
+    scale: 110%;
+}
+
+
+@keyframes enlarge {
+  from {
+    scale: 100%;
+  }
+
+  to {
+    scale: 110%;
+  }
+}

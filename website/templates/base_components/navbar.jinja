@@ -1,0 +1,46 @@
+{% macro navitem(id, url, name, icon='', custom_class='') -%}
+    <li class="topnavli {{ custom_class }}" id="{{ id }}"><a href="{{ url }}"><span
+            class="material-icons md-24 dark-blue">{{ icon }}</span> {{ name }}</a></li>
+{%- endmacro %}
+{% if (not current_user.is_authenticated) or (current_user.admin < 1) or ("admin-site" not in request.url) %}
+    <ul id="navbar" class="topnav">
+        {#    <li class="topnavli"><img alt="Logo" src="/static/img/coding-for-kidz-logo-cropped.jpg" style="width:45%;height:45%;"></li>#}
+        {{ navitem("main", "/", "Coding for Kids", "home") }}
+        {{ navitem("about", "/about", "About", "info") }}
+        {{ navitem("learn", "/learn", "Learn", "school") }}
+        {{ navitem("articles", "/articles", "Articles", "article") }}
+        {% if current_user.is_authenticated %}
+            {{ navitem("projects", "/projects", "Projects", "") }}
+        {% endif %}
+        <li class="topnavli" id="packages" style="color: green;"><a href="/packages">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-box-seam-fill dark-blue" viewBox="0 0 16 16">
+                <path fill-rule="evenodd"
+                      d="M15.528 2.973a.75.75 0 0 1 .472.696v8.662a.75.75 0 0 1-.472.696l-7.25 2.9a.75.75 0 0 1-.557 0l-7.25-2.9A.75.75 0 0 1 0 12.331V3.669a.75.75 0 0 1 .471-.696L7.443.184l.01-.003.268-.108a.75.75 0 0 1 .558 0l.269.108.01.003 6.97 2.789ZM10.404 2 4.25 4.461 1.846 3.5 1 3.839v.4l6.5 2.6v7.922l.5.2.5-.2V6.84l6.5-2.6v-.4l-.846-.339L8 5.961 5.596 5l6.154-2.461L10.404 2Z"></path>
+            </svg>
+            Packages</a></li>
+        {{ navitem("run-code", "/run-code", "Run Code", "code") }}
+        {% if current_user.is_authenticated %}
+            {{ navitem("account", "/account", "Profile", "manage_accounts", "float-right") }}
+            {{ navitem("sign-out", "/logout", "Sign out", "logout", "float-right") }}
+        {% else %}
+            {{ navitem("sign-up", "/signup", "Sign up", "person_add", "float-right") }}
+            {{ navitem("sign-in", "/signin", "Sign in", "person", "float-right") }}
+        {% endif %}
+    </ul>
+{% else %}
+    <ul id="navbar" class="topnav">
+        {#    <li class="topnavli"><img alt="Logo" src="/static/img/coding-for-kidz-logo-cropped.jpg" style="width:45%;height:45%;"></li>#}
+        {{ navitem("main", "/admin-site/", "Coding for Kidz", "home") }}
+        {{ navitem("users", "/admin-site/user/", "Manage Users", "person") }}
+        {{ navitem("learn", "/admin-site/lesson/", "Manage Lessons", "school") }}
+        {{ navitem("articles", "/admin-site/articles/", "Manage Articles", "article") }}
+        {{ navitem("projects", "/admin-site/projects/", "Manage Projects", "add_task") }}
+        {{ navitem("sign-out", "/logout", "Sign out", "logout", "float-right") }}
+    </ul>
+{% endif %}
+<script>
+    if ('windowControlsOverlay' in navigator) {
+        $("#navbar").addClass("topnav-titlebar");
+    }
+</script>

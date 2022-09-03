@@ -1,0 +1,20 @@
+#add-button {
+  top: 1px;
+  left: 1px;
+}
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    /* Footer height */
+    padding-bottom: 2.5rem;
+}
+
+div.content-box {
+    margin: 10% 10% 10% 10%;
+    transition: background-color 1s;
+    background-color: var(--bg-color-dulled);
+}

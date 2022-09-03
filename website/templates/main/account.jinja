@@ -1,0 +1,58 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>Manage Your Account - Coding for kidz</title>
+<meta content="The articles page of the Coding for kidz website" name="description">
+<style>
+    .content-padding {
+        padding-right: 10%;
+        padding-left: 10%;
+    }
+
+</style>
+<script>
+    $(function() {
+    $('button#submit-ajax').bind('click', function() {
+        result = $.post('/api/ep/', {
+            email: $('input[name="email"]').val(),
+            about: $('textarea#about').val(),
+            age: $('input[name="age"]').val()
+        })
+    })
+    })
+
+</script>
+{% endblock %}
+{% block body %}
+<h1>Manage Your Account</h1>
+<form class="row g-3 content-padding">
+    <div class="col-md-10">
+        <div class="form-group form-floating">
+            <input class="form-control" id="email" name="email" placeholder="Email" type="email"
+                   value="{{ user.email }}">
+            <label for="email">Email</label>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="form-group form-floating">
+            <input class="form-control" id="age" max="122" min="1" name="age" placeholder="10"
+                   type="number" value="{{ user.age }}">
+            <label for="age">Age</label>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <label for="writer">About Me</label>
+        {% include 'base_components/editor.jinja' %}
+        <div style="border: solid; border-width: 1px;">
+            <div id="writer"></div>
+        </div>
+        <div id="content">{{ user.about }}</div>
+    </div>
+    <button class="btn btn-primary form-padding" id="submit-ajax" type="button">Update Account</button>
+</form>
+{% endblock %}
+{% block script %}
+<script>
+    $("#account").addClass('active');
+
+</script>
+{% endblock %}

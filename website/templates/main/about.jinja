@@ -1,0 +1,43 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<title>About us - Coding for kidz</title>
+<meta content="The about page of the Coding for Kidz website" name="description">
+<!--suppress GrazieInspection -->
+<style>
+    /* Light mode */
+    @media (prefers-color-scheme: light) {
+        body {
+            background-image: url("/static/img/about-light.png");
+            background-color: #cccccc;
+        }
+    }
+    /* Dark mode */
+    @media (prefers-color-scheme: dark) {
+        body {
+            background-image: url("/static/img/about-dark.png");
+            background-color: #cccccc;
+        }
+    }
+
+</style>
+{% endblock %}
+{% block body %}
+<div class="content-box">
+    <div style="text-align: center;">
+        <h1>About</h1>
+        <p>This website teaches coding to kids in a fun interactive way. It makes learning how to code very easily.
+            Usually kids think coding is difficult and includes lots of memorization, this website will change
+            that perspective. It will teach kids multiple programming languages and basic program structures that will
+            allow them to learn any programming language very easily later in their life! We provide interactive,
+            lessons that engage the student.</p>
+        <br>
+        <p><b>Try out our <a href="/learn">courses</a></b>, no sign up is required. Alternatively you could <a
+                href="/sign-up">sign up</a> to save your progress</p><br>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+    <script>
+        $("#about").addClass('active');
+    </script>
+{% endblock %}

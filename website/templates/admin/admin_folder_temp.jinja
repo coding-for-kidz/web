@@ -1,0 +1,131 @@
+{% extends 'base.jinja' %}
+{% block head %}
+<!--
+~ Copyright 2021 Coding for Kidz Project
+~
+~ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+~
+~ The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+~
+~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+-->
+
+<title>{% if create %}Create Folder{% else %}Edit {{ folder.title }}{% endif %} - Coding for Kidz</title>
+<style>
+    .padding {
+        margin: 20px;
+    }
+
+</style>
+{% endblock %}
+{% block body %}
+<h1>Create Folder</h1>
+<form method="POST">
+    <center>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="folder_id">Folder ID</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="folder_id"
+                       max="10000000" name="folder_id" onfocus="this.removeAttribute('readonly');" required
+                       type="number" value="{{ folder.folder_id }}">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="parent_folder_id">Parent Folder ID</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="parent_folder_id"
+                       max="10000000" name="parent_folder_id" onfocus="this.removeAttribute('readonly');" required
+                       type="number" value="{{ folder.parent_folder_id }}">
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="title">Title</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="title"
+                       name="title" onfocus="this.removeAttribute('readonly');" required
+                       value="{{ folder.title }}">
+            </div>
+
+            <div class="form-text" id="TitleHelpBlock">
+                Make sure the title is not too long, it has to fit on the learn page.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="subtitle">subtitle</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="subtitle"
+                       name="subtitle" onfocus="this.removeAttribute('readonly');" required
+                       value="{{ folder.subtitle }}">
+            </div>
+
+            <div class="form-text" id="SubtitleHelpBlock">
+                Make sure the Subtitle is not too long or too short like a title, it has to fit on the learn page
+                and also be descriptive.
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="image">Image</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="image" name="image" value="{{ folder.image }}">
+            </div>
+
+            <div class="form-text" id="ImageHelpBlock">
+                Make sure the image reflects what is being taught in the folder. You can leave it blank if you
+                don't want to change it.
+            </div>
+        </div>
+        <div class="mb-3">
+            <label class="col-sm-3 col-form-label" for="body">Body</label>
+            <div class="col-sm-3">
+                    <textarea class="form-control" id="body"
+                              name="body" onfocus="this.removeAttribute('readonly');" required>{{ folder.content }}</textarea>
+            </div>
+
+            <div class="form-text" id="BodyHelpBlock">
+                Make sure you are clear and understandable.
+            </div>
+        </div>
+        <button class="btn btn-primary" id="submit" type="submit">{% if create %}Create Folder{% else %}Edit {{
+            folder.title }}{% endif %}
+        </button>
+    </center>
+</form>
+{% if not create %}
+<h2>Folders</h2>
+<div class="row">
+    {% for course in fif %}
+    <div class="col-md-2 padding">
+        <a href="/admin-site/folder/{{ course.folder_id }}/" style="color: black;">
+            <div class="card">
+                <img alt="Card Image Top" class="card-img-top" src="{{ course.image }}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ course.title }}</h4>
+                    <div class="card-subtitle">{{ course.subtitle }}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+<h2>Lessons</h2>
+<div class="row">
+    {% for course in lif %}
+    <div class="col-md-2 padding">
+        <a href="/admin-site/lesson/{{ course.lesson_id }}/" style="color: black;">
+            <div class="card">
+                <img alt="Card Image Top" class="card-img-top" src="{{ course.image }}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ course.title }}</h4>
+                    <div class="card-subtitle">{{ course.subtitle }}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+{% block script %}
+{% endblock %}

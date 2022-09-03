@@ -108,9 +108,12 @@ def edit_profile():
 
 @api.route("/api/notifications/")
 def notifications():
-    notification_string = current_user.notifications
-    if notification_string == "":
-        return jsonify({})
-    notification_list = notification_string.split(",")
+    try:
+        notification_string = current_user.notifications
+        if notification_string == "":
+            return jsonify({})
+        notification_list = notification_string.split(",")
 
-    return jsonify(notifications=notification_list)
+        return jsonify(notifications=notification_list)
+    except:
+        return jsonify({})

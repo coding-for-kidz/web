@@ -18,9 +18,8 @@ def admin_only(f):
 def login_required_api(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print(type(current_user))
-        if (type(current_user)) or (not current_user.is_authenticated):
-            return jsonify({})
+        if not current_user.is_authenticated:
+            return abort(401)
         return f(*args, **kwargs)
 
     return decorated_function()

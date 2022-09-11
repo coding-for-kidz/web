@@ -1,4 +1,5 @@
 {% extends 'base.jinja' %}
+{% import '/auth/form.jinja' as form %}
 {% block head %}
 <title>Sign up - Coding for Kidz</title>
 <style>
@@ -38,19 +39,21 @@
         <div class="opac">
             <h1>Sign up</h1>
             <form autocomplete="on" class="form-padding row g-3" method="POST">
-                <div class="col-md-12 form-floating">
-                    <input class="form-control" id="username" name="username" onfocus="this.removeAttribute('readonly');"
+                <div class="col-md-12 form-floating" style="text-align: left">
+                    <input class="form-control" id="username" name="username"
+                           onfocus="this.removeAttribute('readonly');"
                            placeholder="Username" required value="{{username}}">
-                    <label class="form-label" for="username">Username</label>
+                    {{ form.floating_label("username", "Username") }}
                     <div class="form-text" id="UsernameHelpBlock">
                         Your username must contain only letters and numbers, and must not contain spaces, or emojis.
                     </div>
                 </div>
 
-                <div class="col-md-6 form-floating">
-                    <input class="form-control" id="password" name="password" onfocus="this.removeAttribute('readonly');" placeholder="Password"
+                <div class="col-md-6 form-floating" style="text-align: left">
+                    <input class="form-control" id="password" name="password"
+                           onfocus="this.removeAttribute('readonly');" placeholder="Password"
                            required type="password" value="{{ password }}">
-                    <label for="password">Password</label>
+                    {{ form.floating_label("password", "Password") }}
                     <div class="form-text" id="PasswordHelpBlock">
                         Make sure you have a strong password.
                         <!-- Button trigger modal -->
@@ -92,11 +95,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 form-floating">
-                    <input class="form-control" id="confirm-password" name="confirm-password" onfocus="this.removeAttribute('readonly');"
+                <div class="col-md-6 form-floating" style="text-align: left">
+                    <input class="form-control" id="confirm-password" name="confirm-password"
+                           onfocus="this.removeAttribute('readonly');"
                            placeholder="Confirm Password" required type="password"
                            value="{{confirm}}">
-                    <label class="form-label" for="confirm-password">Confirm Password</label>
+                    {{ form.floating_label("confirm-password", "Confirm Password") }}
                 </div>
                 <div class="col-12">
                     <label for="writer" style="color: white">About Me</label>
@@ -106,32 +110,30 @@
                     </div>
                     <div id="content"></div>
                 </div>
-                <div class="col-md-9 form-floating">
+                <div class="col-md-10 form-floating" style="text-align: left">
                     <input class="form-control" id="email" name="email" placeholder="example@example.com"
                            type="email" value="{{ email }}">
-                    <label for="email">Email</label>
+                    {{ form.floating_label("email", "Email") }}
                     <div class="form-text" id="EmailHelpBlock">
-                        Entering your email is optional and is not required. However, we cannot recover your
-                        passcode if you do not submit your email
+                        Entering your email is optional. However, you cannot recover your account
+                        if you do not submit your email.
                     </div>
                 </div>
-                <div class="col-md-3 form-floating">
+                <div class="col-md-2 form-floating" style="text-align: left">
                     <input class="form-control" id="age" max="122" min="1" name="age" placeholder="10"
                            type="number" value="{{ age }}">
-                    <label class="form-label" for="age">Age</label>
+                    {{ form.floating_label("age", "Age") }}
                     <div class="form-text" id="AgeHelpBlock">
-                        Entering your age is optional and is not required.
+                        Entering your age is optional.
                     </div>
                 </div>
-                <div class="col-md-10">
+                <div class="col-md-9" style="text-align: left">
                     <input class="form-control" id="file" name="file" type="file" value="{{ file }}">
-                    <label for="file">Profile picture (beta testing)</label>
+                    {{ form.floating_label("file", "Profile picture") }}
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <input class="form-check-input" id="tos" type="checkbox" value="">
-                    <label class="form-check-label" for="tos">
-                        Agree to the <a href="/tos">Terms of Service</a>
-                    </label>
+                    <label class="form-check-label" for="tos">Agree to the <a href="/tos">Terms of Service</a></label>
                     <div class="invalid-feedback">
                         You must agree to the Terms of Service before signing up.
                     </div>

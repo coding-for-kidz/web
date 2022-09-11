@@ -1,4 +1,4 @@
-{% macro modal(id, trigger_text, title, dismiss="Close", action="Understood", action_bind="") -%}
+{% macro modal(id, trigger_text, title, content, dismiss="Close", action="Understood", action_bind="") -%}
     {# Button trigger modal #}
     <button class="btn btn-link" data-bs-target="#{{ id }}" data-bs-toggle="modal"
             type="button">
@@ -15,7 +15,7 @@
                             type="button"></button>
                 </div>
                 <div class="modal-body">
-                    {{ caller() }}
+                    {{ content }}
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">

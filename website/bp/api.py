@@ -13,11 +13,13 @@
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
-from flask import abort, Blueprint, request, jsonify, render_template
+import markdown
+from flask import abort, Blueprint, request, jsonify, render_template, Response
 from flask_login import login_user, current_user
+
 from services.web.core.data import check_auth
 from services.web.core.logger import log, LogType
+from services.web.website.config import GlobalConfig
 from services.web.website.models import database
 from services.web.website.models.lesson_models import Lesson
 from services.web.website.models.user_model import User
@@ -117,3 +119,17 @@ def notifications():
         return jsonify(notifications=notification_list)
     else:
         abort(401)
+
+
+@api.route("/api/preview")
+def preview() -> Response:
+    text = markdown.markdown(request.args.get("text", type=str))
+    return jsonify(text)
+
+
+@api.route("/static-cache/version/")
+def cache_version():
+    if not GlobalConfig.development:
+        return jsonify({"version": str(GlobalConfig.data_inited)})
+    else:
+        return jsonify({"version": str("")})

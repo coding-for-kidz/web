@@ -13,14 +13,10 @@
 # AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-import os
 
-import markdown
 from flask import (
     Blueprint,
-    request,
     redirect,
-    jsonify,
     Response,
     render_template,
     session,
@@ -29,8 +25,8 @@ from flask import (
 from flask_login import current_user
 from werkzeug.exceptions import abort
 
+from services.web.core import path
 from services.web.website import cache
-from services.web.website.config import GlobalConfig
 from services.web.website.models import database
 
 util = Blueprint("util", __name__)
@@ -50,16 +46,14 @@ def terms_of_service():
 @util.route("/robots.txt", endpoint="robots")
 @cache.cached(timeout=31536000)
 def robots():
-    pwd = os.path.dirname(os.path.realpath(__file__))
-    pwd = pwd[0: len(pwd) - 3] + "/static"  # noqa E203
+    pwd = str(path.cfk_dir() / "services" / "web" / "website" / "static")
     resp = send_from_directory(pwd, "robots.txt")
     return resp
 
 
 @util.route("/favicon.ico")
 def favicon():
-    pwd = os.path.dirname(os.path.realpath(__file__))
-    pwd = pwd[0: len(pwd) - 3] + "/static"  # noqa E203
+    pwd = str(path.cfk_dir() / "services" / "web" / "website" / "static")
     resp = send_from_directory(pwd, "favicon.ico")
     return resp
 
@@ -68,12 +62,6 @@ def favicon():
 @cache.cached(timeout=31536000)
 def refresh() -> Response:
     return redirect("/", 301)
-
-
-@util.route("/_preview")
-def preview() -> Response:
-    text = markdown.markdown(request.args.get("text", type=str))
-    return jsonify(text)
 
 
 @util.route("/createall", endpoint="create_all")
@@ -102,11 +90,6 @@ def trigger_error():
 @cache.cached(timeout=3600)
 def offline():
     return render_template("offline.jinja")
-
-
-@util.route("/static-cache/version/")
-def cache_version():
-    return jsonify({"version": str(GlobalConfig.data_inited)})
 
 
 @util.route("/os-css.css")

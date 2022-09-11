@@ -37,7 +37,10 @@ from services.web.website.config import (
     BuiltInConfig,
 )
 
-os.chdir(cfk_dir())
+try:
+    os.chdir(cfk_dir())
+except TypeError:
+    pass
 current_time = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
 log_file = str(cfk_dir() / "logs/" / ("web_" + current_time + ".log"))
 f = open(log_file, "w")

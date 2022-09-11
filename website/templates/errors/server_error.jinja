@@ -9,25 +9,19 @@
 <title>Error - Coding for kidz</title>
 {% endblock %}
 {% block body %}
-<div style="text-align:center">
-    <h1>Error</h1>
-    <script>
-        setTimeout(function () {
-            window.history.back();
-        }, `10000`);
+    <div style="text-align:center">
+        <h1>Error</h1>
+        <img src="/static/img/error-500.svg" alt="Person looking at server." height="50%" width="50%">
 
-
-    </script>
-    There is an error here, that's all I know. Maybe you should return to the home page or the previous, this
-    error has
-    <noscript>not</noscript>
-    been automatically reported.
-    <br>
-    <button class="btn btn-link" onclick="window.history.back()">
-        Return to the previous page (this will happen automatically in ten seconds)
-    </button>
-    <br>
-</div>
+        <p>Something happened on our end, and we could not perform the requested action. Maybe you should return to what
+            you had been previously doing, this
+            error has </p>
+        <noscript>not</noscript>
+        been automatically reported.<br>
+        <button class="btn btn-link" onclick="window.history.back()">Go back to what you were doing</button>
+        <button class="btn btn-link" onclick="window.location = '/'">Go home</button>
+        <br>
+    </div>
 {% endblock %}
 {% if sentry_event_id %}
 {% block script %}

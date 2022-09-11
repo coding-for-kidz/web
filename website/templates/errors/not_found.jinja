@@ -9,48 +9,57 @@
 
         /* Animation */
         .typer {
-            animation: animated-text 4s steps(29,end) 1s 1 normal both,
-                        animated-cursor 600ms steps(29,end) infinite;
+            animation: animated-text 4s steps(29, end) 1s 1 normal both,
+            animated-cursor 600ms steps(29, end) infinite;
         }
 
         /* text animation */
 
-        @keyframes animated-text{
-            from{width: 0px;}
-            to{width: 510px;}
+        @keyframes animated-text {
+            from {
+                width: 0;
+            }
+            to {
+                width: 510px;
+            }
         }
 
         /* cursor animations */
 
-        @keyframes animated-cursor{
-            from {border-right-color: black;}
-            to {border-right-color: transparent;}
+        @keyframes animated-cursor {
+            from {
+                border-right-color: black;
+            }
+            to {
+                border-right-color: transparent;
+            }
         }
+
         .typewriter {
-            border: 1px solid rgba(0,0,0,0.125);
-            padding: 4%;
-            padding-right:2%;
+            border: 1px solid rgba(0, 0, 0, 0.125);
+            padding: 4% 2% 4% 4%;
         }
+
         .btn {
-            margin-left:20px;
+            margin-left: 20px;
             margin-bottom: 20px;
         }
 
 </style>
-<title>Not Found - Coding for kidz</title>
+    <title>Not Found - Coding for kidz</title>
 {% endblock %}
 {% block body %}
-<div style="text-align: center;">
-    <h1>Not Found</h1>
-    <img alt="not found" height="50%" src="/static/img/not-found.jpg" width="50%">
-    <center>
-        <p class="typer">I searched everywhere but couldn't find the page you were looking for.</p>
-        <br>
-        <p><a href="/">Return to home page</a></p>
-        <br>
-        <p><a href="/page_not_found_error">Report Error</a></p>
-    </center>
-</div>
+    <div style="text-align: center;">
+        <h1>Not Found</h1>
+        <img alt="not found" src="/static/img/not-found.svg" height="50%" width="50%">
+        <center>
+            <p class="typer">I searched everywhere but couldn't find the page you were looking for.</p>
+            <br>
+            <p><a href="/">Return to home page</a></p>
+            <br>
+            <p><a href="/page_not_found_error">Report Error</a></p>
+        </center>
+    </div>
 {% endblock %}
 {% block script %}
 {% endblock %}

@@ -15,7 +15,9 @@
 # TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 import logging
+import os
 import sys
+from datetime import datetime
 
 import flask.cli
 import sentry_sdk
@@ -24,6 +26,7 @@ from htmlmin import minify
 
 from services.web.core.http_parse import OperatingSystem, UserAgent
 from services.web.core.logger import log, LogType
+from services.web.core.path import cfk_dir
 from services.web.website.cfk_flask import CFKFlask
 from services.web.website.config import (
     DevConfig,
@@ -34,11 +37,17 @@ from services.web.website.config import (
     BuiltInConfig,
 )
 
-with open("main.log", "w") as main_log:
-    main_log.write("")
-    main_log.close()
-
-logging.basicConfig(filename="main.log", encoding="utf-8", level=logging.DEBUG)
+os.chdir(cfk_dir())
+current_time = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+log_file = str(cfk_dir() / "logs/" / ("web_" + current_time + ".log"))
+f = open(log_file, "w")
+f.write("")
+f.close()
+logging.basicConfig(
+    filename=log_file,
+    encoding="utf-8",
+    level=logging.DEBUG,
+)
 werkzeug_log = logging.getLogger("werkzeug")
 werkzeug_log.setLevel(logging.ERROR)
 
@@ -74,7 +83,11 @@ def _select_jinja_autoescape(filename):
 
 
 def create_app(
-        config_file="", development=False, testing=False, docker=False, log_level=1
+        config_file="config.cfg",
+        development=False,
+        testing=False,
+        docker=False,
+        log_level=1,
 ) -> CFKFlask:
     """Creates the app
     @param config_file: the config file
@@ -86,8 +99,7 @@ def create_app(
     GlobalConfig.development = development
     GlobalConfig.log_level = log_level
     GlobalConfig.docker = docker
-    if config_file != "":
-        BuiltInConfig(config_file)
+    BuiltInConfig(str(cfk_dir() / config_file))
     init()
 
     log("Creating app", 2)

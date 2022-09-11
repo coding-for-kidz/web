@@ -1,5 +1,6 @@
 """The module has the Config classes"""
 import configparser
+
 #  Copyright 2021 Coding for Kidz Project
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
@@ -37,6 +38,7 @@ except ImportError:
         SQLALCHEMY_TRACK_MODIFICATIONS = True
         TEMPLATES_AUTO_RELOAD = True
 
+
     class SharedProdConfig(SharedConfig):
         """Production config"""
 
@@ -44,13 +46,19 @@ except ImportError:
         DEBUG_TB_INTERCEPT_REDIRECTS = True
         TEMPLATES_AUTO_RELOAD = False
 
-from services.secrets import DATABASE_URI, SECRET_KEY, GOOGLE_OAUTH_CLIENT_ID, GOOGLE_OAUTH_CLIENT_SECRET
+from services.secrets import (
+    DATABASE_URI,
+    SECRET_KEY,
+    GOOGLE_OAUTH_CLIENT_ID,
+    GOOGLE_OAUTH_CLIENT_SECRET,
+)
 
 
 class BuiltInConfig:
     def __init__(self, file):
         config = configparser.ConfigParser()
         config.read(file)
+        self.cfk_config = config["cfk"]
 
 
 class GlobalConfig:
@@ -58,11 +66,22 @@ class GlobalConfig:
     docker = False
     sentry = True
     redis = False
+    redis_port = 6379
     version = "0.0.0"
     release_status = "alpha"
     codename = "Great Dane"
     data_inited = str(datetime.datetime.now())
     log_level = 1
+    admin_site = True
+    allow_signin = True
+    compile_frontend_on_start = False
+    color_text = True
+    debug = True
+    sentry_traces_sample_rate = 0.1
+    os_style = True
+    init_sentry = True
+    init_redis = False
+    init_mail = True
 
 
 class Config(SharedConfig):

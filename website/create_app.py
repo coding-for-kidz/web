@@ -215,13 +215,14 @@ def create_app(
     @app.errorhandler(400)
     def error_400(e):
         """Error 400"""
+        log(str(e), LogType.WARNING)
         return render_template("errors/client_error_400.jinja")
 
     @app.errorhandler(401)
     def error_401(e):
         """Error 401"""
         import random
-
+        log(str(e), LogType.WARNING)
         exercises = ["push-ups", "sit-ups", "jumping jacks", "toe taps", "push-ups"]
         number = random.randint(0, len(exercises))
         return (
@@ -232,16 +233,19 @@ def create_app(
     @app.errorhandler(404)
     def error_404(e):
         """Error 404"""
+        log(str(e), LogType.WARNING)
         return render_template("errors/not_found.jinja"), 404
 
     @app.errorhandler(405)
     def error_405(e):
         """Error 405"""
+        log(str(e), LogType.ERROR)
         return render_template("errors/client_error_405.jinja"), 405
 
     @app.errorhandler(413)
     def error_413(e):
         """Error 413"""
+        log(str(e), LogType.ERROR)
         return (
             'The file is too large<br><a href=" / ">Return to the home page </a>.',
             413,
@@ -250,13 +254,14 @@ def create_app(
     @app.errorhandler(418)
     def error_418(e):
         """Error 418"""
+        log(str(e), LogType.DEBUG)
         return render_template("errors/teapot.jinja"), 418
 
     @app.errorhandler(500)
     def error_500(e):
         """Error 500"""
         from sentry_sdk import last_event_id
-
+        log(str(e), LogType.ERROR)
         return (
             render_template(
                 "errors/server_error.jinja", sentry_event_id=last_event_id(), error=e

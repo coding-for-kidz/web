@@ -26,7 +26,7 @@
 {% endif %}
 {% for course in lessons_for_you %}
 <div class="col-md-4">
-        <a href={% if current_user.admin >= 3 %}"/admin-site/lesson/edit/{{ course.lesson_id }}"{% else %}"/lesson/{{ course.lesson_id }}/"{% endif %} style="color: black;">
+    <a href={% if current_user.admin >= 3 %}"/admin-site/lesson/edit/{{ course.lesson_id }}"{% else %}"/lesson/{{ course.lesson_id }}/"{% endif %} style="color: black;">
         <div class="card">
             <img alt="Card Image Top" class="card-img-top" src="{{ course.image }}">
             <div class="card-body">

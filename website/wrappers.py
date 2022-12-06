@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import abort, redirect, url_for, request, jsonify
+from flask import abort, redirect, url_for, request
 from flask_login import current_user
 from services.web.core.logger import log, LogType
 

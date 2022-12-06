@@ -16,7 +16,7 @@
 # SOFTWARE.
 
 from services.web.website.create_app import create_app  # noqa F401
-from services.web.website.global_stuff import (  # noqa F401
+from services.web.website.global_services import (  # noqa F401
     cache,  # noqa F401
     mail,  # noqa F401
     login_manager,  # noqa F401

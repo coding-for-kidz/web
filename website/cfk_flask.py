@@ -68,7 +68,7 @@ class CFKFlask(Flask):
                             ``'templates'`` folder in the root path of the
                             application.
     :param instance_path: An alternative instance path for the application.
-                          By default the folder ``'instance'`` next to the
+                          By default, the folder ``'instance'`` next to the
                           package or module is assumed to be the instance
                           path.
     :param instance_relative_config: if set to ``True`` relative filenames

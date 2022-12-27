@@ -16,7 +16,7 @@ blinker==1.5
     # via flask-mail
 cachelib==0.9.0
     # via flask-caching
-certifi==2022.6.15
+certifi==2022.12.7
     # via
     #   requests
     #   sentry-sdk
